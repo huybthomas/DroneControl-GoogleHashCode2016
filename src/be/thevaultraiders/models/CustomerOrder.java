@@ -10,15 +10,51 @@ import java.util.List;
  */
 public class CustomerOrder {
 
+    private int destX, destY;
+    private List<Product> reqProducts;
+    private int totalOrderWeight;
+
     private int priority;
     private Warehouse closestWarehouse;
 
-    private Location destination;
-    private List<Product> reqProducts;
-
     public CustomerOrder(int destX, int destY) {
-        this.destination = new Location(destX, destY);
+        this.destX = destX;
+        this.destY = destY;
         reqProducts = new ArrayList<>();
+        totalOrderWeight = 0;
+    }
+
+    public int getDestX() {
+        return destX;
+    }
+
+    public void setDestX(int destX) {
+        this.destX = destX;
+    }
+
+    public int getDestY() {
+        return destY;
+    }
+
+    public void setDestY(int destY) {
+        this.destY = destY;
+    }
+
+    public void addProduct(Product product) {
+        this.reqProducts.add(product);
+        this.totalOrderWeight += product.getPayload();
+    }
+
+    public List<Product> getReqProducts() {
+        return reqProducts;
+    }
+
+    public int getTotalOrderWeight() {
+        return totalOrderWeight;
+    }
+
+    public void setTotalOrderWeight(int totalOrderWeight) {
+        this.totalOrderWeight = totalOrderWeight;
     }
 
     public int getPriority() {
@@ -29,32 +65,27 @@ public class CustomerOrder {
         this.priority = priority;
     }
 
-    public Location getLocation() {
-        return destination;
+    public Warehouse getClosestWarehouse() {
+        return closestWarehouse;
     }
 
-    public void setLocation(Location destination) {
-        this.destination = destination;
-    }
-
-    public void addProduct(Product product) {
-        this.reqProducts.add(product);
-    }
-
-    public List<Product> getReqProducts() {
-        return reqProducts;
+    public void setClosestWarehouse(Warehouse closestWarehouse) {
+        this.closestWarehouse = closestWarehouse;
     }
 
     public void calculatePriority(List<Warehouse> warehouses) {
-        double optimalDistance = Integer.MAX_VALUE;
+
+        double optimalDistance = 1.0 * Integer.MAX_VALUE;
         Warehouse optimalWarehouse = null;
+
         for(Warehouse warehouse : warehouses) {
-            double distance = Calculator.calculateDistance(destination.getDestX(), destination.getDestY(), warehouse.getLocation().getDestX(), warehouse.getLocation().getDestY());
+            double distance = Calculator.calculateDistance(destX, destY, warehouse.getLocation().getDestX(), warehouse.getLocation().getDestY());
             if(distance < priority) {
                 optimalDistance = distance;
                 optimalWarehouse = warehouse;
             }
         }
+
         priority = (int) Math.round(optimalDistance);
         closestWarehouse = optimalWarehouse;
     }

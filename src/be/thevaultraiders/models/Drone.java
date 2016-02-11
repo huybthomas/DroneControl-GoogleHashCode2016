@@ -6,13 +6,12 @@ package be.thevaultraiders.models;
 public class Drone
 {
     private int maxPayload;
-    private int locX, locY;
+    private Location location;
 
     public Drone(int maxPayload, int locX, int locY)
     {
         this.maxPayload = maxPayload;
-        this.locX = locX;
-        this.locY = locY;
+        this.location = new Location(locX, locY);
     }
 
     public int getMaxPayload()
@@ -25,23 +24,13 @@ public class Drone
         this.maxPayload = maxPayload;
     }
 
-    public int getLocX()
+    public Location getLocation()
     {
-        return locX;
+        return this.location;
     }
 
-    public void setLocX(int locX)
+    public void setLocation(Location location)
     {
-        this.locX = locX;
-    }
-
-    public int getLocY()
-    {
-        return locY;
-    }
-
-    public void setLocY(int locY)
-    {
-        this.locY = locY;
+        this.location = location;
     }
 }

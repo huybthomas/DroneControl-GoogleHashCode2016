@@ -9,13 +9,12 @@ import java.util.List;
  */
 public class Warehouse
 {
-    private int locX, locY;
+    private Location location;
     private List<List<Product>> stock;
 
     public Warehouse(int locX, int locY, int numProductTypes)
     {
-        this.locX = locX;
-        this.locY = locY;
+        this.location = new Location(locX, locY);
         this.stock = new ArrayList<List<Product>>();
 
         for(int i = 0; i < numProductTypes; i++)
@@ -24,24 +23,14 @@ public class Warehouse
         }
     }
 
-    public int getLocX()
+    public Location getLocation()
     {
-        return locX;
+        return this.location;
     }
 
-    public void setLocX(int locX)
+    public void setLocation(Location location)
     {
-        this.locX = locX;
-    }
-
-    public int getLocY()
-    {
-        return locY;
-    }
-
-    public void setLocY(int locY)
-    {
-        this.locY = locY;
+        this.location = location;
     }
 
     public void addProduct(Product product)

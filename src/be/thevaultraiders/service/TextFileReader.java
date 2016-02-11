@@ -4,6 +4,7 @@ package be.thevaultraiders.service;
  * Created by Arthur on 11/02/2016.
  */
 
+import be.thevaultraiders.models.CustomerOrder;
 import be.thevaultraiders.models.Product;
 import be.thevaultraiders.models.Warehouse;
 
@@ -33,9 +34,6 @@ public class TextFileReader {
             line++;
             //Read First Line
             String sCurrLineSplit[] = sCurrentLine.split(" ");
-            System.out.println(sCurrLineSplit[0]);
-            System.out.println(sCurrLineSplit[1]);
-            System.out.println(sCurrLineSplit.length);
 
             int nRows = Integer.parseInt(sCurrLineSplit[0]);
             int nCols = Integer.parseInt(sCurrLineSplit[1]);
@@ -49,6 +47,11 @@ public class TextFileReader {
             line++;
             int nWarehouses = Integer.parseInt(sCurrentLine);
             Warehouse[] warehouses = parseWarehouses(nWarehouses, weights);
+
+            sCurrentLine = reader.readLine();
+            line++;
+            int nOrders = Integer.parseInt(sCurrentLine);
+            CustomerOrder[] orders = parseOrders(nOrders, weights);
             System.out.println("End Parse");
             /*
             while ((sCurrentLine != null && !sCurrentLine.contains("]"))) {
@@ -129,5 +132,30 @@ public class TextFileReader {
             }
         }
         return warehouses;
+    }
+
+    private CustomerOrder[] parseOrders(int nOrders, int[] weights){
+        CustomerOrder[] orders = new CustomerOrder[1250];
+        for(int i=0; i<nOrders; i++){
+            try {
+                sCurrentLine = reader.readLine();
+                line++;
+                //Read First Line
+                String sCurrLineSplit[] = sCurrentLine.split(" ");
+                orders[i] = new CustomerOrder(Integer.parseInt(sCurrLineSplit[0]), Integer.parseInt(sCurrLineSplit[1]));
+                sCurrentLine = reader.readLine();
+                line++;
+                int nOrdersLocal = Integer.parseInt(sCurrentLine);
+                sCurrentLine = reader.readLine();
+                line++;
+                String sCurrLineSplit2[] = sCurrentLine.split(" ");
+                for(int j=0; j<nOrdersLocal; j++){
+                    orders[i].addProduct(new Product(Integer.parseInt(sCurrLineSplit2[j]), weights[Integer.parseInt(sCurrLineSplit2[j])]));
+                }
+            }catch(Exception e){
+                orders = new CustomerOrder[0];
+            }
+        }
+        return orders;
     }
 }

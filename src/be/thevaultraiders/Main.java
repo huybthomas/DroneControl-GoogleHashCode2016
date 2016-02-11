@@ -1,5 +1,6 @@
 package be.thevaultraiders;
 
+import be.thevaultraiders.service.DroneService;
 import be.thevaultraiders.terminal.Terminal;
 
 /**
@@ -8,11 +9,15 @@ import be.thevaultraiders.terminal.Terminal;
 public class Main
 {
     private static Terminal terminal;
+    private static DroneService droneService;
 
     public static void main(String[] args)
     {
         //setup terminal
         terminal = new Terminal();
+
+        //setup droneService
+        droneService = new DroneService();
 
         terminal.activateTerminal();
     }

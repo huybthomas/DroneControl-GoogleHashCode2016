@@ -16,6 +16,14 @@ public class Simulation
         this.totalStepsDrones = 0;
     }
 
+    public void advanceSimulationTime(){
+        this.simulationTime++;
+    }
+
+    public void addStep(){
+        this.totalStepsDrones++;
+    }
+
     public Map getMap()
     {
         return this.map;

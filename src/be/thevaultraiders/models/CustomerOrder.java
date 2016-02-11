@@ -88,6 +88,8 @@ public class CustomerOrder {
 
         priority = (int) Math.round(optimalDistance);
         closestWarehouse = optimalWarehouse;
+
+        closestWarehouse.placeOrder(this);
     }
 
 }

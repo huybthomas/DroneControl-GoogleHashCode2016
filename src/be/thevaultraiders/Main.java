@@ -19,6 +19,8 @@ public class Main
         //setup droneService
         droneService = new DroneService();
 
+        //
+
         terminal.activateTerminal();
 
 

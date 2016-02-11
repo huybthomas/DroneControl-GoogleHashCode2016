@@ -1,6 +1,7 @@
 package be.thevaultraiders.service;
 
 import be.thevaultraiders.models.Map;
+import be.thevaultraiders.models.Simulation;
 import be.thevaultraiders.models.Warehouse;
 
 import java.util.List;
@@ -10,9 +11,10 @@ import java.util.List;
  */
 public class SimulatorCreator
 {
-    public void createSimulation(int numDrones, List<Warehouse> warehouses)
+    public Simulation createSimulation(String filename)
     {
-
+        TextFileReader reader = new TextFileReader();
+        reader.parseFile(filename);
 
 
     }

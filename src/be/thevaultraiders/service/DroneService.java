@@ -1,12 +1,19 @@
 package be.thevaultraiders.service;
 
+import be.thevaultraiders.models.Simulation;
+
 /**
  * Created by Thomas on 11/02/2016.
  */
 public class DroneService
 {
-    public DroneService()
+    public DroneService(String filename)
     {
+        SimulatorCreator creator = new SimulatorCreator();
+        Simulation simulation = creator.createSimulation(filename);
+        
+        //Simulation loop
+        //CODE VOOR SIMULATIE HIER, WERKEN MET model Simulation voor data
 
     }
 

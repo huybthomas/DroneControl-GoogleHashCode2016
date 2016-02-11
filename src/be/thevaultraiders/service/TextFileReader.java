@@ -24,8 +24,55 @@ public class TextFileReader {
     private String sCurrentLine;
     private int line;
 
-    public TextFileReader(String fileName){
+    private int nRows;
 
+    public int getnRows() {
+        return nRows;
+    }
+
+    public int getnCols() {
+        return nCols;
+    }
+
+    public int getnDrones() {
+        return nDrones;
+    }
+
+    public int gettDeadline() {
+        return tDeadline;
+    }
+
+    public int getMaxLoad() {
+        return maxLoad;
+    }
+
+    public int getnWarehouses() {
+        return nWarehouses;
+    }
+
+    public Warehouse[] getWarehouses() {
+        return warehouses;
+    }
+
+    public int getnOrders() {
+        return nOrders;
+    }
+
+    public CustomerOrder[] getOrders() {
+        return orders;
+    }
+
+    private int nCols;
+    private int nDrones;
+    private int tDeadline;
+    private int maxLoad;
+    private int nWarehouses;
+    private Warehouse[] warehouses;
+    private int nOrders;
+    private CustomerOrder[] orders;
+
+    public void parseFile(String fileName)
+    {
         line = 1;
 
         try {
@@ -35,22 +82,22 @@ public class TextFileReader {
             //Read First Line
             String sCurrLineSplit[] = sCurrentLine.split(" ");
 
-            int nRows = Integer.parseInt(sCurrLineSplit[0]);
-            int nCols = Integer.parseInt(sCurrLineSplit[1]);
-            int nDrones = Integer.parseInt(sCurrLineSplit[2]);
-            int tDeadline = Integer.parseInt(sCurrLineSplit[3]);
-            int maxLoad = Integer.parseInt(sCurrLineSplit[4]);
+            nRows = Integer.parseInt(sCurrLineSplit[0]);
+            nCols = Integer.parseInt(sCurrLineSplit[1]);
+            nDrones = Integer.parseInt(sCurrLineSplit[2]);
+            tDeadline = Integer.parseInt(sCurrLineSplit[3]);
+            maxLoad = Integer.parseInt(sCurrLineSplit[4]);
 
             int[] weights = parseWeights();
 
             sCurrentLine = reader.readLine();
             line++;
-            int nWarehouses = Integer.parseInt(sCurrentLine);
+            nWarehouses = Integer.parseInt(sCurrentLine);
             Warehouse[] warehouses = parseWarehouses(nWarehouses, weights);
 
             sCurrentLine = reader.readLine();
             line++;
-            int nOrders = Integer.parseInt(sCurrentLine);
+            nOrders = Integer.parseInt(sCurrentLine);
             CustomerOrder[] orders = parseOrders(nOrders, weights);
             System.out.println("End Parse");
             /*

@@ -1,5 +1,7 @@
 package be.thevaultraiders.models;
 
+import be.thevaultraiders.util.Calculator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,9 @@ import java.util.List;
  */
 public class CustomerOrder {
 
-    private boolean priority;
+    private int priority;
+    private Warehouse closestWarehouse;
+
     private Location destination;
     private List<Product> reqProducts;
 
@@ -17,11 +21,11 @@ public class CustomerOrder {
         reqProducts = new ArrayList<>();
     }
 
-    public boolean getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    public void setPriority(boolean priority) {
+    public void setPriority(int priority) {
         this.priority = priority;
     }
 
@@ -39,6 +43,20 @@ public class CustomerOrder {
 
     public List<Product> getReqProducts() {
         return reqProducts;
+    }
+
+    public void calculatePriority(List<Warehouse> warehouses) {
+        double optimalDistance = Integer.MAX_VALUE;
+        Warehouse optimalWarehouse = null;
+        for(Warehouse warehouse : warehouses) {
+            double distance = Calculator.calculateDistance(destination.getDestX(), destination.getDestY(), warehouse.getLocation().getDestX(), warehouse.getLocation().getDestY());
+            if(distance < priority) {
+                optimalDistance = distance;
+                optimalWarehouse = warehouse;
+            }
+        }
+        priority = (int) Math.round(optimalDistance);
+        closestWarehouse = optimalWarehouse;
     }
 
 }

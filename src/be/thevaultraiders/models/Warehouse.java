@@ -11,11 +11,13 @@ public class Warehouse
 {
     private Location location;
     private List<List<Product>> stock;
+    private List<CustomerOrder> orders;
 
     public Warehouse(int locX, int locY, int numProductTypes)
     {
         this.location = new Location(locX, locY);
         this.stock = new ArrayList<List<Product>>();
+        this.orders = new ArrayList<CustomerOrder>();
 
         for(int i = 0; i < numProductTypes; i++)
         {
@@ -51,6 +53,16 @@ public class Warehouse
         }
     }
 
+    public void addOrder(CustomerOrder order)
+    {
+        this.orders.add(order);
+    }
+
+    public void addOrders(List<CustomerOrder> orders)
+    {
+        this.orders.addAll(orders);
+    }
+
     public Product getProduct(int productType)
     {
         Product product;
@@ -72,6 +84,41 @@ public class Warehouse
             //List is empty
             return null;
         }
+    }
+
+    public CustomerOrder getNextOrder()
+    {
+        CustomerOrder highPriorOrder;
+        CustomerOrder nextOrder;
+
+        Iterator<CustomerOrder> it = this.orders.iterator();
+
+        if(it.hasNext())
+        {
+            highPriorOrder = it.next();
+        }
+        else
+        {
+            //List is empty
+            return null;
+        }
+
+        while(it.hasNext())
+        {
+            nextOrder = it.next();
+
+            if(nextOrder.getPriority() > highPriorOrder.getPriority())
+            {
+                highPriorOrder = nextOrder;
+            }
+        }
+
+        return highPriorOrder;
+    }
+
+    public List<CustomerOrder> getOrders()
+    {
+        return this.orders;
     }
 
     public int getNumberOfProductsAvailable(int productType)

@@ -1,4 +1,4 @@
-package be.thevaultraiders;
+package be.thevaultraiders.service;
 
 /**
  * Created by Arthur on 11/02/2016.
@@ -8,7 +8,6 @@ import be.thevaultraiders.models.Product;
 import be.thevaultraiders.models.Warehouse;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;

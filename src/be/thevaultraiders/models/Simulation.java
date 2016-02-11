@@ -6,10 +6,14 @@ package be.thevaultraiders.models;
 public class Simulation
 {
     private Map map;
+    private int simulationTime;
+    private int totalStepsDrones;
 
     public Simulation(int mapSizeX, int mapSizeY)
     {
         this.map = new Map(mapSizeX, mapSizeY);
+        this.simulationTime = 0;
+        this.totalStepsDrones = 0;
     }
 
     public Map getMap()
@@ -17,4 +21,13 @@ public class Simulation
         return this.map;
     }
 
+    public int getSimulationTime()
+    {
+        return this.simulationTime;
+    }
+
+    public int getTotalStepsDrones()
+    {
+        return this.totalStepsDrones;
+    }
 }

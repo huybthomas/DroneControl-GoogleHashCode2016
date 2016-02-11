@@ -7,7 +7,7 @@ public class Location {
 
     private int locX, locY;
 
-    public Location(int destX, int locY) {
+    public Location(int locX, int locY) {
         this.locX = locX;
         this.locY = locY;
     }

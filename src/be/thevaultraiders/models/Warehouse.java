@@ -39,6 +39,18 @@ public class Warehouse
         stock.get(product.getProductType()).add(product);
     }
 
+    public void addProducts(List<Product> products)
+    {
+        Iterator<Product> it = products.iterator();
+
+        while(it.hasNext())
+        {
+            Product product = it.next();
+
+            this.addProduct(product);
+        }
+    }
+
     public Product getProduct(int productType)
     {
         Product product;

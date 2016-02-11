@@ -14,12 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextFileReader {
-
-    public static void main(String[] args){
-        new TextFileReader("files/busy_day.in");
-    }
-
+public class TextFileReader
+{
     private BufferedReader reader;
     private String sCurrentLine;
     private int line;

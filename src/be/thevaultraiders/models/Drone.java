@@ -40,9 +40,29 @@ public class Drone
         this.location = location;
     }
 
-    public void loadProduct(Product product)
+    public boolean loadProduct(Product product)
     {
-        this.products.add(product);
+        if(this.getCurrentLoad() + product.getPayload() <= this.maxPayload)
+        {
+            this.products.add(product);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public int getCurrentLoad()
+    {
+        int currentLoad = 0;
+
+        for(int i = 0; i < this.products.size(); i++)
+        {
+            currentLoad = this.products.get(i).getPayload();
+        }
+
+        return currentLoad;
     }
 
     public Product unloadNextProduct()

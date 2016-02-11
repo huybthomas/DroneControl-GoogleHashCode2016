@@ -17,14 +17,9 @@ public class Main
         terminal = new Terminal();
 
         //setup droneService
-        droneService = new DroneService();
-
-        //
+        droneService = new DroneService("files/busy_day.in");
 
         terminal.activateTerminal();
-
-
-
     }
 
     /**

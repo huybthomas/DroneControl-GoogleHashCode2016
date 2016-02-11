@@ -13,6 +13,7 @@ public class Drone
     private Location location;
     private List<Product> products;
     private boolean available;
+    private int flightTime;
 
     public Drone(int maxPayload, int locX, int locY)
     {
@@ -72,4 +73,11 @@ public class Drone
     public void setAvailable(boolean available) {
         this.available = available;
     }
+
+    public void flightTick(){
+        flightTime--;
+        if(flightTime == 0){
+            this.setAvailable(true);
+        }
+    };
 }

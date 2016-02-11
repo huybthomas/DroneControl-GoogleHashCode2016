@@ -29,8 +29,15 @@ public class DroneService
                 if(drone.isAvailable()){
                      //Assign Order
 
+
+                    drone.setAvailable(false);
                 }
+                else{
+                    drone.flightTick();
+                }
+                simulation.addStep();
             }
+            simulation.advanceSimulationTime();
         }
     }
 

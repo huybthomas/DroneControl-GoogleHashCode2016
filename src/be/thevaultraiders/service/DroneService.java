@@ -1,6 +1,9 @@
 package be.thevaultraiders.service;
 
+import be.thevaultraiders.models.Drone;
 import be.thevaultraiders.models.Simulation;
+
+import java.util.Iterator;
 
 /**
  * Created by Thomas on 11/02/2016.
@@ -15,6 +18,20 @@ public class DroneService
         //Simulation loop
         //CODE VOOR SIMULATIE HIER, WERKEN MET model Simulation voor data
 
+        //Divide all drones over warehouses
+
+        //Main loop
+        boolean notDone = false;
+        while(!notDone){
+            Iterator droneItr = simulation.getMap().getDrones().iterator();
+            while(droneItr.hasNext()){
+                Drone drone = (Drone)droneItr.next();
+                if(drone.isAvailable()){
+                     //Assign Order
+
+                }
+            }
+        }
     }
 
     public int[] mergeSort(int[] data){

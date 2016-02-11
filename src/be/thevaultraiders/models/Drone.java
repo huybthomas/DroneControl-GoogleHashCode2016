@@ -12,6 +12,7 @@ public class Drone
     private int maxPayload;
     private Location location;
     private List<Product> products;
+    private boolean available;
 
     public Drone(int maxPayload, int locX, int locY)
     {
@@ -82,5 +83,13 @@ public class Drone
             //No products on board
             return null;
         }
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 }

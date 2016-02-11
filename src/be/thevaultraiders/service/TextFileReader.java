@@ -125,7 +125,7 @@ public class TextFileReader {
                         list.add(new Product(j, weights[j]));
                     }
                 }
-                warehouses[i].addProducts(list);
+                warehouses[i].addStockProducts(list);
 
             }catch(Exception e){
                 warehouses = new Warehouse[0];

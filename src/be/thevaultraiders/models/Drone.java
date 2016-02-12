@@ -12,7 +12,7 @@ public class Drone
     private int maxPayload;
     private Location location;
     private List<Product> products;
-    private boolean available;
+    private List<Order> orders;
     private int flightTime;
 
     public Drone(int maxPayload, int locX, int locY)
@@ -20,6 +20,7 @@ public class Drone
         this.maxPayload = maxPayload;
         this.location = new Location(locX, locY);
         this.products = new ArrayList<Product>();
+        this.orders = new ArrayList<Order>();
     }
 
     public int getMaxPayload()
@@ -47,6 +48,7 @@ public class Drone
         if(this.getCurrentLoad() + product.getPayload() <= this.maxPayload)
         {
             this.products.add(product);
+            //Sort product for shortest possible flight time
             return true;
         }
         else
@@ -86,18 +88,22 @@ public class Drone
         }
     }
 
-    public boolean isAvailable() {
-        return available;
+    private void flyTo(Location location){
+        int distX = this.location.getDestX()-location.getDestX();
+        int distY = this.location.getDestY()-location.getDestY();
+        int sq = distX^2+distY^2;
+        double dist = Math.sqrt(sq);
+        flightTime=(int)Math.ceil(dist);
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
-
-    public void flightTick(){
-        flightTime--;
-        if(flightTime == 0){
-            this.setAvailable(true);
+    public void droneTick(){
+        if(products.isEmpty() && flightTime <= 0){
+            //this.flyTo()                  //Fly to nearest warehouse
+        }else if(flightTime <=0 && !products.isEmpty()){
+            this.unloadNextProduct();        //Unload Next product
+            //this.flyTo()                  //fly to next order
+        }else{
+            flightTime--;
         }
-    };
+    }
 }

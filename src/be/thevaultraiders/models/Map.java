@@ -54,6 +54,10 @@ public class Map
         return drones;
     }
 
+    public List getWarehouses(){
+        return warehouses;
+    }
+
     public Drone getDrone(int number)
     {
         if(number > 0 && number < drones.size())

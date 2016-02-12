@@ -11,6 +11,7 @@ public class Drone
 {
     private int maxPayload;
     private Location location;
+    private Warehouse designatedWarehouse;
     private List<Product> products;
     private List<Order> orders;
     private int flightTime;
@@ -105,5 +106,17 @@ public class Drone
         }else{
             flightTime--;
         }
+    }
+
+    public void returnHome(){
+        this.flyTo(this.designatedWarehouse.getLocation());
+    }
+
+    public Warehouse getDesignatedWarehouse() {
+        return designatedWarehouse;
+    }
+
+    public void setDesignatedWarehouse(Warehouse designatedWarehouse) {
+        this.designatedWarehouse = designatedWarehouse;
     }
 }

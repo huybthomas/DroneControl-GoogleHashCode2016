@@ -2,6 +2,7 @@ package be.thevaultraiders.service;
 
 import be.thevaultraiders.models.Drone;
 import be.thevaultraiders.models.Simulation;
+import be.thevaultraiders.models.Warehouse;
 
 import java.util.Iterator;
 
@@ -18,7 +19,36 @@ public class DroneService
         //Simulation loop
         //CODE VOOR SIMULATIE HIER, WERKEN MET model Simulation voor data
 
+        //TODO open output file
+        //TODO output data to outputFile
+
         //Divide all drones over warehouses
+        int nDrones = simulation.getMap().getDrones().size();
+        int nWarehouses = simulation.getMap().getWarehouses().size();
+        int nDronesPerWarehouse = (int)Math.floor(nDrones/(double)nWarehouses);
+
+        Iterator<Drone> droneIterator = simulation.getMap().getDrones().iterator();
+        Iterator<Warehouse>  warehouseIterator = simulation.getMap().getWarehouses().iterator();
+        while(warehouseIterator.hasNext()){
+            Warehouse warehouse = warehouseIterator.next();
+            for(int j=0; j<nDronesPerWarehouse; j++){
+                Drone drone = droneIterator.next();
+                drone.setDesignatedWarehouse(warehouse);
+            }
+        }
+        while(droneIterator.hasNext()){
+            Drone drone = droneIterator.next();
+            Warehouse warehouse = warehouseIterator.next();
+            drone.setDesignatedWarehouse(warehouse);
+        }
+
+        //Setup drones --> i.e. make them fly to the  warehouses
+        droneIterator = simulation.getMap().getDrones().iterator();
+        while(droneIterator.hasNext()){
+            Drone drone = droneIterator.next();
+            drone.returnHome();
+            //TODO Print steps
+        }
 
         //Main loop
         boolean notDone = false;
@@ -26,15 +56,8 @@ public class DroneService
             Iterator droneItr = simulation.getMap().getDrones().iterator();
             while(droneItr.hasNext()){
                 Drone drone = (Drone)droneItr.next();
-                if(drone.isAvailable()){
-                     //Assign Order
-
-
-                    drone.setAvailable(false);
-                }
-                else{
-                    drone.flightTick();
-                }
+                //TODO Drone Logic && Order Logic
+                drone.droneTick();
                 simulation.addStep();
             }
             simulation.advanceSimulationTime();
